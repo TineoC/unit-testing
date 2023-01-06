@@ -1,4 +1,4 @@
-import Major from "../../types/Majors";
+import { Major } from "../Major/Major";
 import { Grade } from "../Grade/Grade";
 import { Person } from "../Person/Person";
 import { Subject } from "../Subject/Subject";
@@ -27,12 +27,17 @@ export class Student extends Person {
 	}
 
 	addSubject(subject: Subject) {
-		if (!(subject.GetCredit() + this.TotalCurrentCredits() > this.maxCredits)) {
+		if (
+			!(
+				subject.GetCredit() + this.TotalCurrentCredits() >
+				this.maxCredits
+			)
+		) {
 			this.subjects.push(subject);
-		}
-		else {
+		} else {
 			throw new Error(
-				"Credits Should be less than " + this.maxCredits.toString());
+				"Credits Should be less than " + this.maxCredits.toString()
+			);
 		}
 	}
 
@@ -40,9 +45,8 @@ export class Student extends Person {
 		var totalCredits: number = 0;
 		this.subjects.map((subject) => {
 			totalCredits += subject.GetCredit();
-		})
+		});
 
 		return totalCredits;
-
 	}
 }
