@@ -1,9 +1,9 @@
-import Major from "../../types/Majors";
+import { Major } from "../Major/Major";
 import { Grade } from "../Grade/Grade";
 import { Person } from "../Person/Person";
 import { Subject } from "../Subject/Subject";
 
-class Student extends Person {
+export class Student extends Person {
 	private readonly major: Major;
 	private readonly grades: Grade[];
 	private readonly subjects: Subject[];
@@ -27,6 +27,26 @@ class Student extends Person {
 	}
 
 	addSubject(subject: Subject) {
-		this.subjects.push(subject);
+		if (
+			!(
+				subject.GetCredit() + this.TotalCurrentCredits() >
+				this.maxCredits
+			)
+		) {
+			this.subjects.push(subject);
+		} else {
+			throw new Error(
+				"Credits Should be less than " + this.maxCredits.toString()
+			);
+		}
+	}
+
+	TotalCurrentCredits(): number {
+		var totalCredits: number = 0;
+		this.subjects.map((subject) => {
+			totalCredits += subject.GetCredit();
+		});
+
+		return totalCredits;
 	}
 }

@@ -8,6 +8,10 @@ export class Subject {
 		this.name = name;
 		this.credits = credits;
 
-		if (!(credits >= 0 && credits <6)) throw new Error("Credits should be between 0 and 5");
+		if (!(credits >= 0 && credits < 6)) throw new Error("Credits should be between 0 and 5");
+	}
+
+	GetCredit(): number {
+		return this.credits;
 	}
 }
